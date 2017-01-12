@@ -1,0 +1,15 @@
+Notes for author:
+
+1. Lesson 8.1: typo; should say 700x500. 
+	"The code below will bounce the rectangle off all four sides of a 700x400 window:"
+
+2. Lesson 8.2.1: typo; should say snow
+	it draws the show in new random locations
+
+3. Lesson 8.2.1: could consider providing additional instructions between
+	recommending the base_template and asking the reader to insert snippet of code into main while loop and observing the 20 times per second problem. 
+	A new user maybe wouldn't go down to your finished code, copy/paste it, and 
+	then delete sufficent parts to begin testing your code snippets. Thus, not
+	learning how the actual program works! :)
+
+4. Lesson 
