@@ -1,13 +1,10 @@
 """
-Use sprites to collect blocks.
-
 Sample Python/Pygame Programs
 Simpson College Computer Science
 http://programarcadegames.com/
 http://simpson.edu/computer-science/
-
-Explanation video: http://youtu.be/4W2AqUetBi4
 """
+
 import pygame
 import random
 
@@ -19,14 +16,13 @@ RED = (255, 0, 0)
 
 class Block(pygame.sprite.Sprite):
     """
-    This class represents the ball.
-    It derives from the "Sprite" class in Pygame.
+    This class represents the ball
+    It derives from the "Sprite" class in Pygame
     """
 
     def __init__(self, color, width, height):
         """ Constructor. Pass in the color of the block,
         and its x and y position. """
-
         # Call the parent class (Sprite) constructor
         super().__init__()
 
@@ -41,18 +37,33 @@ class Block(pygame.sprite.Sprite):
         # of rect.x and rect.y
         self.rect = self.image.get_rect()
 
-    def reset_pos(self):
-        self.rect.y = random.randrange(-215, -15)
-        self.rect.x = random.randrange(700 - 20)
+        # Instance variables that control the edges of where we bounce
+        self.left_boundary = 0
+        self.right_boundary = 0
+        self.top_boundary = 0
+        self.bottom_boundary = 0
+
+        # Instance variables for our current speed and direction
+        self.change_x = 0
+        self.change_y = 0
 
     def update(self):
-        self.rect.y += 1
+        """ Called each frame. """
+        self.rect.x += self.change_x
+        self.rect.y += self.change_y
 
-        if self.rect.y > 415:
-            self.reset_pos()
+        if self.rect.right >= self.right_boundary or self.rect.left <= self.left_boundary:
+            self.change_x *= -1
+
+        if self.rect.bottom >= self.bottom_boundary or self.rect.top <= self.top_boundary:
+            self.change_y *= -1
 
 
 class Player(Block):
+    """ The player class derives from Block, but overrides the 'update'
+    functionality with new a movement function that will move the block
+    with the mouse. """
+
     def update(self):
         # Get the current mouse position. This returns the position
         # as a list of two numbers.
@@ -77,8 +88,7 @@ screen = pygame.display.set_mode([screen_width, screen_height])
 # added to this list. The list is managed by a class called 'Group.'
 block_list = pygame.sprite.Group()
 
-# This is a list of every sprite.
-# All blocks and the player block as well.
+# This is a list of every sprite. All blocks and the player block as well.
 all_sprites_list = pygame.sprite.Group()
 
 for i in range(50):
@@ -89,11 +99,18 @@ for i in range(50):
     block.rect.x = random.randrange(screen_width)
     block.rect.y = random.randrange(screen_height)
 
+    block.change_x = random.randrange(-3, 4)
+    block.change_y = random.randrange(-3, 4)
+    block.left_boundary = 0
+    block.top_boundary = 0
+    block.right_boundary = screen_width
+    block.bottom_boundary = screen_height
+
     # Add the block to the list of objects
     block_list.add(block)
     all_sprites_list.add(block)
 
-# Create a RED player block
+# Create a red player block
 player = Player(RED, 20, 15)
 all_sprites_list.add(player)
 
@@ -114,25 +131,24 @@ while not done:
     # Clear the screen
     screen.fill(WHITE)
 
+    # Calls update() method on every sprite in the list
     all_sprites_list.update()
 
     # See if the player block has collided with anything.
-    # Set 3rd argument to True if you want block to disappear on collision
-    blocks_hit_list = pygame.sprite.spritecollide(player, block_list, False)
+    blocks_hit_list = pygame.sprite.spritecollide(player, block_list, True)
 
     # Check the list of collisions.
     for block in blocks_hit_list:
         score += 1
         print(score)
-        block.reset_pos()
 
     # Draw all the spites
     all_sprites_list.draw(screen)
 
-    # Go ahead and update the screen with what we've drawn.
-    pygame.display.flip()
-
     # Limit to 60 frames per second
     clock.tick(60)
+
+    # Go ahead and update the screen with what we've drawn.
+    pygame.display.flip()
 
 pygame.quit()
