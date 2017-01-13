@@ -1,10 +1,7 @@
 """
-Pygame base template for opening a window, done with functions
-
- Sample Python/Pygame Programs
- Simpson College Computer Science
- http://programarcadegames.com/
- http://simpson.edu/computer-science/
+Lab12.py
+Shapes Gone Wild
+1000 random ellipse and rectangles
 
 """
 
