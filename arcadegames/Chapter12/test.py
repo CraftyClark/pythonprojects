@@ -1,14 +1,23 @@
-class Person():
+# Example of an instance variable
+class ClassA():
     def __init__(self):
-        self.name = ""
-        self.money = 0
+        self.y = 3
  
-bob = Person()
-bob.name = "Bob"
-bob.money = 100
+# Example of a static variable
+class ClassB():
+    x = 7
  
-nancy = Person()
-nancy.name = "Nancy"
+# Create class instances
+a = ClassA()
+b = ClassB()
  
-print(bob.name, "has", bob.money, "dollars.")
-print(nancy.name, "has", nancy.money, "dollars.")
+# Two ways to print the static variable.
+# The second way is the proper way to do it.
+print(b.x)
+print(ClassB.x)
+ 
+# One way to print an instance variable.
+# The second generates an error, because we don't know what instance
+# to reference.
+print(a.y)
+print(ClassA.y)

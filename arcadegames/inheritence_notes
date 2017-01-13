@@ -1,0 +1,17 @@
+Is-A and Has-A Relationships:
+
+A parent class should always be a more general, abstract version of the child class. This type of child to parent relationship is called an "Is-A" relationship.
+For an example, a parent class Animal could have a child class Dog. The Dog class could have a child class Poodle.
+Another example, a dolphin "Is-A" mammal. It does NOT work the other way, a mammal is not necessarily a dolphin. So the calss Dolphin should never be a parent class to mammal.
+
+The other type of relationship is the "Has-A" relationship.
+These relationships are implemented in code by class attributes.
+A dog has a name, and so the Dog class has an attribute for name.
+Likewise, a person could have a dog, and that would be implemented by having the Person class have an attribute for dog. However the person class would not derive from Dog.
+
+Examples:
+    Employee is a person
+    Customer is a person
+    Person has a name
+    Employee has a job title
+    Customer has an email

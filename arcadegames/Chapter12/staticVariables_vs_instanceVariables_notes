@@ -1,0 +1,14 @@
+The difference between static and instance variables can be confusing.
+
+An instance variable is the type of class variable we've used so far.
+Each instance of the class gets its own value.
+For an example, in a room full of people each person will have their own age.
+Some of the ages may be the same, but we still need to track each age individually.
+
+With instance variables, we can't just say "age" with a room full of people.
+We need to specify whose age we are talking about. Also, if there are no people in the room, then referring to an age when there are no people to have an age makes no sense.
+
+With static variables, the value is the same for every single instance of the class. Even if there are no instances, there still is a value for a static variable.
+For an example, we might have a "count" static variable for the number of "Human" classes in existence. No humans? The value is zero, but it still exist.
+
+
