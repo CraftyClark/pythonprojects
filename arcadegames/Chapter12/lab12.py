@@ -18,6 +18,7 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
+NUMBER_OF_SHAPES = 500  # 500*2 = 1000 shapes (2 for loops)
 
 
 # Create class Rectangle
@@ -29,12 +30,13 @@ class Rectangle():
         self.width = 0
         self.change_x = 0
         self.change_y = 0
+        self.color = [0, 255, 0]
 
     def draw(self, screen):
         """Method creates a green 10x10 rectangle at location stored in
         self.x and self.y. Use screen reference to draw to correct screen"""
         pygame.draw.rect(
-            screen, GREEN, [self.x, self.y, self.width, self.height])
+            screen, self.color, [self.x, self.y, self.width, self.height])
 
     def move(self):
         """Method adjusts x and y based on change_x and change_y"""
@@ -47,7 +49,8 @@ class Ellipse(Rectangle):
 
     def draw(self, screen):
         """Draw ellipse(Surface, color, Rect, width=0) -> Rect"""
-        pygame.draw.ellipse(screen, RED, super().draw(screen), width=0)
+        pygame.draw.ellipse(
+            screen, self.color, [self.x, self.y, self.width, self.height])
 
 
 def main():
@@ -69,7 +72,7 @@ def main():
     # Create and display a list of objects
     my_list = []
     # Loop through 10 times, and create 10 objects
-    for i in range(10):
+    for i in range(NUMBER_OF_SHAPES):
         # Create variable my_object and set equal to new instance of Rectangle
         my_object = Rectangle()
         my_object.x = random.randrange(0, 700)
@@ -78,11 +81,21 @@ def main():
         my_object.height = random.randrange(20, 70)
         my_object.change_x = random.randrange(-3, 3)
         my_object.change_y = random.randrange(-3, 3)
+        my_object.color = [random.randrange(0, 255), random.randrange(
+            0, 255), random.randrange(0, 255)]
         my_list.append(my_object)
 
     # Create for loop that adds 10 instances of Ellipse
-    for i in range(10):
+    for i in range(NUMBER_OF_SHAPES):
         my_object = Ellipse()
+        my_object.x = random.randrange(0, 700)
+        my_object.y = random.randrange(0, 500)
+        my_object.width = random.randrange(20, 70)
+        my_object.height = random.randrange(20, 70)
+        my_object.change_x = random.randrange(-3, 3)
+        my_object.change_y = random.randrange(-3, 3)
+        my_object.color = [random.randrange(0, 255), random.randrange(
+            0, 255), random.randrange(0, 255)]
         my_list.append(my_object)
 
     # -------- Main Program Loop -----------
